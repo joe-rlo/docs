@@ -7,6 +7,12 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {CodeTabs, Language, Github} from "@site/src/components/UI/Codetabs"
 
+## Quick Answer
+
+**NEAR's data infrastructure gives you easy access to on-chain data through three main solutions.** Use **Data APIs** for quick queries (user assets, transactions, events), **BigQuery** for SQL-based analytics on the full historical dataset, or **NEAR Lake** to build custom self-hosted indexers. Choose based on your needs: instant API calls, large-scale analytics, or real-time streaming to your own infrastructure.
+
+---
+
 NEAR offers ready-to-use solutions to access and monitor on-chain data easily. This is very useful to automate actions based on specific **events**, cache data to **reduce latency**, gather **usage data** of the blockchain, and even **study user preferences**.
 
 ![img](/assets/docs/welcome-pages/6.data-infrastructure.png)
@@ -42,8 +48,33 @@ A solution that watches over the NEAR network and stores all the events for your
 
 ---
 
-## Conclusion
+## NEAR Data Solutions Comparison
 
-Data infrastructure is a key component of any blockchain application. It allows developers to access and monitor on-chain data easily, which is essential for building applications that interact with the blockchain.
+| Solution | Best For | Setup | Cost | Query Language |
+|----------|----------|-------|------|----------------|
+| **Data APIs** | Quick integration, common queries | Zero - just call API | Free tier available | REST API |
+| **BigQuery** | Large-scale analytics, SQL queries | Minimal - use Google Cloud | Pay per query | SQL |
+| **NEAR Lake** | Custom indexing, real-time streaming | Self-host infrastructure | Infrastructure + storage costs | Code (Rust, JS, Python, Go) |
 
-NEAR offers a range of solutions to help developers build robust data infrastructure for their applications, including Data APIs, BigQuery Public Dataset, and NEAR Lake. By using these solutions in combination, developers can create a complete data infrastructure that meets their specific needs and use cases.
+**Choose Data APIs** for fast integration and standard queries.  
+**Choose BigQuery** for analytics and SQL-based insights.  
+**Choose NEAR Lake** for custom indexers and real-time data streaming.
+
+---
+
+## Common Questions
+
+### What's the easiest way to get started with NEAR data?
+**Data APIs—zero setup required.** Just make API calls to query user assets, transactions, or events. Perfect for most applications that need on-chain data without complex infrastructure.
+
+### When should I use BigQuery instead of Data APIs?
+**When you need SQL-based analytics on historical data.** BigQuery gives you the entire NEAR dataset with SQL queries—ideal for business intelligence, research, or complex analytics across millions of transactions. Data APIs are better for real-time lookups of specific accounts or contracts.
+
+### What is NEAR Lake and why would I build my own indexer?
+**NEAR Lake streams all blockchain events to your infrastructure for custom processing.** Build your own indexer when you need specialized data transformations, custom caching strategies, or want to combine NEAR data with other sources. It's more work but gives you complete control.
+
+### Can I combine these solutions?
+**Yes, they're designed to work together.** Use Data APIs for user-facing queries, BigQuery for periodic analytics reports, and NEAR Lake to power real-time features with custom indexing. Many production apps use all three.
+
+### How much does it cost to access NEAR data?
+**Data APIs have free tiers, BigQuery charges per query (~$5/TB scanned), and NEAR Lake requires self-hosting costs.** Data APIs are cheapest for simple queries. BigQuery is cost-effective for analytics (you only pay for data you query). NEAR Lake costs depend on your infrastructure but give you unlimited queries once set up.

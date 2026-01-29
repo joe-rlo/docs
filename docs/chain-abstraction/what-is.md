@@ -7,6 +7,12 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {CodeTabs, Language, Github} from "@site/src/components/UI/Codetabs";
 
+## Quick Answer
+
+**Chain abstraction makes blockchain complexity invisible to users while preserving all benefits.** NEAR's framework enables developers to build cross-chain applications using three core technologies: **NEAR Intents** (express desired outcomes, solvers handle execution), **Chain Signatures** (control accounts on any blockchain from NEAR), and **OmniBridge** (secure cross-chain asset transfers). Users interact with a simple interface while the system handles multi-chain operations behind the scenes.
+
+---
+
 Blockchain development today faces a critical challenge: users need to understand complex blockchain concepts, manage multiple wallets, and deal with different networks just to use basic applications. Chain abstraction solves this by making blockchain technology invisible to end users while preserving all of the underlying benefits.
 
 ![img](/assets/docs/welcome-pages/2.chain-abstraction.png)
@@ -132,3 +138,32 @@ This architecture creates a robust bridge system that combines NEAR's ability to
 :::info
 For detailed implementation information and current status, see the [OmniBridge documentation](omnibridge/overview.md).
 :::
+
+---
+
+## Chain Abstraction Technologies Comparison
+
+| Technology | Purpose | Key Capability | Use Case |
+|-----------|---------|----------------|----------|
+| **NEAR Intents** | Intent-based transactions | Users express outcomes, solvers execute | "Swap Token A for B at best price" across chains |
+| **Chain Signatures** | Cross-chain control | NEAR accounts sign transactions on other chains | Control Bitcoin/Ethereum accounts from NEAR |
+| **OmniBridge** | Asset bridging | Secure cross-chain token transfers | Move assets between NEAR and other blockchains |
+
+---
+
+## Common Questions
+
+### What's the difference between chain abstraction and cross-chain bridges?
+**Chain abstraction is a complete user experience framework, not just asset movement.** Traditional bridges only move tokens between chains—users still need multiple wallets and must understand which chain they're on. Chain abstraction makes blockchain completely invisible: users submit intents, the system handles cross-chain operations, and everything works seamlessly.
+
+### Do I need to learn multiple blockchain platforms to build with chain abstraction?
+**No, you build on NEAR and reach all chains.** Write smart contracts once on NEAR, and use Chain Signatures to interact with Bitcoin, Ethereum, and other blockchains. NEAR Intents handle cross-chain complexity automatically.
+
+### How does NEAR Intents differ from traditional transactions?
+**Intents express what you want, not how to do it.** Traditional transactions require specifying every step: bridge assets, swap on DEX, handle gas fees. Intents let you say "get me the best price" and solvers compete to find the optimal path across all chains and venues.
+
+### Is chain abstraction secure?
+**Yes, through decentralized MPC and verification layers.** Chain Signatures use Multi-Party Computation with no single point of failure. OmniBridge combines MPC with chain-specific light clients for verification. The Intent Layer uses solver competition to ensure optimal execution.
+
+### What chains does NEAR's chain abstraction support?
+**Bitcoin, Ethereum, Base, and more through Chain Signatures.** OmniBridge currently supports NEAR and expanding to major EVM chains. NEAR Intents can coordinate actions across any blockchain where solvers operate.

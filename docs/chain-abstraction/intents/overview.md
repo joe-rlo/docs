@@ -5,6 +5,12 @@ sidebar_label: NEAR Intents
 description: "Learn how the intents protocol works"
 ---
 
+## Quick Answer
+
+**NEAR Intents let users express what they want, not how to do it.** Instead of executing complex multi-chain transactions yourself, you submit an intent (like "swap Token A for Token B at the best price") and a decentralized network of solvers (market makers and AI agents) compete to fulfill it optimally. The winning solution is verified on-chain, giving you the best outcome without managing blockchain complexity.
+
+---
+
 NEAR Intents is a multichain transaction protocol where users specify what they want and let third parties compete to provide the best solution. This works for everything from token swaps to pizza delivery, creating a universal marketplace across crypto and traditional services.
 
 ![NEAR Intents Overview](/assets/docs/chain-abstraction/intents-overview.png)
@@ -37,3 +43,33 @@ Here are some resources to get started using NEAR Intents:
 :::info
 Currently there is no `testnet` deployment.
 :::
+
+---
+
+## Intents vs Traditional Transactions
+
+| Approach | User Experience | Execution | Optimization | Complexity |
+|----------|----------------|-----------|--------------|-----------|
+| **Traditional Transactions** | Specify every step manually | User executes each transaction | User finds best path | High - manage gas, bridges, DEXs |
+| **NEAR Intents** | Express desired outcome | Solvers execute automatically | Solvers compete for best solution | Low - submit intent, approve quote |
+
+**Key difference:** Traditional transactions require you to be the expert. Intents let experts compete to serve you.
+
+---
+
+## Common Questions
+
+### How are NEAR Intents different from regular blockchain transactions?
+**Intents separate what you want from how it's done.** Regular transactions require you to specify every step: bridge tokens, approve contracts, swap on specific DEX, pay gas fees. Intents let you say "I want outcome X" and the solver network figures out the optimal path across all chains and services.
+
+### Who are the solvers and why should I trust them?
+**Solvers are market makers and AI agents competing for your business.** They compete to offer the best solution because they earn fees only if you accept their quote. The final transaction is verified by a smart contract on NEAR, so solvers can't cheat—they must deliver what they promised.
+
+### What kinds of intents can I submit?
+**Anything from token swaps to real-world services.** Token swaps are the most common (get best price across all DEXs and CEXs), but intents can also handle NFT purchases, cross-chain DeFi operations, stablecoin conversions, and even off-chain services like ordering pizza. If someone can solve it, you can intent it.
+
+### Do I pay extra fees for using intents?
+**Solver fees are included in the quote you approve.** You see the final price upfront before accepting. Because solvers compete, they're incentivized to offer competitive pricing. Often, the optimized execution path saves you more than any additional fees.
+
+### Can AI agents use NEAR Intents?
+**Yes, NEAR Intents are designed for both humans and AI agents.** Agents can submit intents, act as solvers, or negotiate with other agents. This creates an AI economy where agents autonomously trade, provide services, and optimize outcomes for users.

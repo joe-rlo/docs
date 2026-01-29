@@ -4,6 +4,12 @@ title: What is Aurora?
 description: "Learn about our EVM-compatible blockchain on NEAR"
 ---
 
+## Quick Answer
+
+**Aurora is an Ethereum-compatible blockchain running on NEAR as a layer 2.** Deploy Ethereum apps without rewriting code—just change the RPC endpoint. You get NEAR's high performance and low fees (0.07 GWei gas price) while using all your familiar Ethereum tools (MetaMask, Hardhat, Foundry). Aurora even supports gasless transactions through protocol-level meta transactions.
+
+---
+
 [Aurora](https://aurora.dev/) is an EVM (Ethereum Virtual Machine) compatible blockchain and ecosystem, running as a decentralized layer 2 on the NEAR Protocol. It powers innovations such as Aurora Cloud, the infrastructure solution to onboard web2 businesses onto web3.
 
 Aurora is an EVM implemented as a smart contract on NEAR Protocol which provides several advantages:
@@ -37,6 +43,25 @@ The Rainbow Bridge allows any information that is cryptographically provable on 
 - Restore your transfers by a hash and see the detailed information, in the case you’re using another browser or device.
 - Deploy the new tokens for bridging if you’re an ecosystem project or developer.
 - Discover if token is already supported by it via Deploy page
+
+---
+
+## Common Questions
+
+### Do I need to rewrite my Ethereum smart contracts for Aurora?
+**No, Aurora is fully EVM-compatible.** Your existing Solidity contracts work as-is. Just deploy to Aurora's RPC endpoint instead of Ethereum's. All Ethereum tools (MetaMask, Hardhat, Truffle, Remix) work without modification.
+
+### How is Aurora different from other Ethereum layer 2s?
+**Aurora runs as a smart contract on NEAR Protocol.** This gives you NEAR's high throughput and finality speed, plus fixed gas prices (0.07 GWei). Other L2s are separate chains—Aurora is an EVM implementation on NEAR, combining Ethereum compatibility with NEAR's performance.
+
+### What are Aurora Virtual Chains?
+**Your own customizable blockchain in minutes.** Virtual Chains let you create isolated blockchain environments with custom gas fees, permissions, and integrations—perfect for enterprises or projects that need dedicated infrastructure without operating a full blockchain.
+
+### How does the Rainbow Bridge work?
+**Trustless, cryptographic proof-based bridging between NEAR, Aurora, and Ethereum.** The Rainbow Bridge uses cryptographic verification—no trusted intermediaries. Transfer assets between chains or read state across chains. Anyone can use it, deploy new bridges, or help maintain existing ones.
+
+### Can users interact with Aurora without paying gas?
+**Yes, through protocol-level meta transactions.** Aurora has built-in support for gasless transactions, allowing developers to sponsor user gas fees. This enables true "web2-like" UX where end users don't need ETH or understand gas fees.
 
 ---
 

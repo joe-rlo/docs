@@ -1,0 +1,630 @@
+# NEAR Protocol Documentation - Full Reference
+
+## Overview
+NEAR is the unified commerce layer for assets and agents. It's a layer-1 blockchain built for scale (13M+ transactions/day, 5 years zero downtime) that enables AI agents to own accounts, sign transactions across any blockchain, and execute trades through an intent-based system.
+
+### Core Pillars
+1. **Universal Trading Protocol (Intents)**: Intent-based transactions where users express desired outcomes and solvers compete to execute optimally
+2. **Confidential AI Infrastructure (NEAR AI)**: AI agents with on-chain identity that can control assets and transact autonomously
+3. **Secure Infrastructure (Protocol)**: Battle-tested L1 with sharded architecture, account abstraction, and cross-chain capabilities
+4. **Governance (House of Stake)**: Community-driven governance model
+5. **Economics**: Sustainable tokenomics and developer incentives
+
+---
+
+## Chain Abstraction
+
+### What is Chain Abstraction?
+Chain abstraction makes blockchain complexity invisible to users while preserving all benefits. NEAR's framework enables developers to build cross-chain applications using three core technologies:
+
+1. **NEAR Intents**: Express desired outcomes, solvers handle execution
+2. **Chain Signatures**: Control accounts on any blockchain from NEAR
+3. **OmniBridge**: Secure cross-chain asset transfers
+
+**Resources:**
+- Main guide: /chain-abstraction/what-is
+- NEAR Intents: /chain-abstraction/intents/overview
+- Chain Signatures: /chain-abstraction/chain-signatures/getting-started
+- Meta Transactions: /chain-abstraction/meta-transactions
+
+### NEAR Intents
+NEAR Intents let users express what they want, not how to do it. Instead of executing complex multi-chain transactions yourself, you submit an intent (like "swap Token A for Token B at the best price") and a decentralized network of solvers (market makers and AI agents) compete to fulfill it optimally.
+
+**How it works:**
+1. User/agent submits intent expressing desired outcome
+2. Solvers (market makers, AI agents) compete to provide best solution
+3. Winner presents quote for approval
+4. On approval, Verifier contract on NEAR executes and settles
+
+**Key differences from traditional transactions:**
+- Intents: Express outcome → Solvers optimize and execute → Low complexity
+- Traditional: Specify every step → User executes → High complexity (manage gas, bridges, DEXs)
+
+**Use cases:**
+- Token swaps across chains at best price
+- Cross-chain DeFi operations
+- NFT purchases
+- Real-world services (powered by solver network)
+
+### Chain Signatures
+Chain Signatures enable NEAR accounts (including smart contracts) to sign and execute transactions on other blockchains using Multi-Party Computation (MPC).
+
+**Key capabilities:**
+- Single NEAR account controls multiple blockchain accounts
+- Write contracts on NEAR that interact with Bitcoin, Ethereum, Base, etc.
+- Decentralized MPC with no single point of failure
+- Supports UTXO (Bitcoin) and account-based (Ethereum) models
+
+**Supported chains:** Bitcoin, Ethereum, Base, and any chain with signature verification
+
+### Meta Transactions (Gasless Transactions)
+Meta transactions let users transact without paying gas fees while maintaining security. A relayer (web service with funded NEAR account) receives signed transactions from users and submits them on-chain, covering gas costs.
+
+**How it works:**
+- User signs transaction (maintains security)
+- Relayer submits to blockchain (pays gas)
+- User doesn't need NEAR tokens
+
+**Preventing abuse:**
+- Whitelist specific contracts
+- Set gas allowances per account
+- Require OAuth tokens
+- Use multiple keys to prevent nonce collisions
+
+**Resources:**
+- Building a relayer: /chain-abstraction/meta-transactions
+- Rust relayer server: https://github.com/near/pagoda-relayer-rs/
+
+---
+
+## AI Native Infrastructure
+
+### Overview
+NEAR enables User-Owned AI through frameworks that allow AI agents to control blockchain accounts and execute on-chain actions autonomously.
+
+**Key frameworks:**
+1. **Shade Agents**: Verifiable, non-custodial, multichain AI agents in TEEs
+2. **NEAR AI**: Agent network infrastructure with monetization
+
+**Resources:**
+- Getting started: /ai/introduction
+- Shade Agents: /ai/shade-agents/getting-started/introduction
+- NEAR AI docs: https://docs.near.ai
+
+### Shade Agents
+Shade Agents are AI agent frameworks to create verifiable agents that can control accounts across multiple blockchains with assurance that the agent cannot lose access and private keys will never be revealed.
+
+**Key features:**
+- Operate in Trusted Execution Environments (TEEs)
+- Decentralized key management (any agent instance with same code can access same accounts)
+- Non-custodial (no single point of failure)
+- Multichain support (Bitcoin, Ethereum, NEAR, etc.)
+
+**Capabilities:**
+- Autonomously sign transactions across chains
+- Interact with AI models and external data
+- Manage assets
+- Privacy-preserving verifiable computations
+
+**Use case:** Agentic Protocols - decentralized applications designed to be autonomous, proactive, and intelligent
+
+### NEAR AI
+NEAR AI builds agent network infrastructure to support User-Owned Agents:
+- Monetizable open-source AI agents
+- Agent-to-agent communication
+- End-to-end confidential iterations
+
+**Access:** NEAR AI Assistant (chat.near.ai/chat) - single interface that intelligently selects appropriate agents and connects them for complex tasks
+
+**Which framework to choose:**
+- **Shade Agents**: Production agents with real funds, trustless multichain control (Advanced)
+- **NEAR AI**: Monetizing AI agents, agent marketplace with payments (Moderate)
+
+---
+
+## Smart Contracts
+
+### Overview
+Smart contracts are programs stored on blockchain accounts. NEAR supports JavaScript, Rust, Python, and Go, all compiled to WebAssembly.
+
+**Quick start:** /smart-contracts/quickstart
+
+### Key Concepts
+
+**Contract Anatomy:**
+- Methods (view functions and change functions)
+- State management
+- Cross-contract calls
+- Gas and storage
+
+**Testing:**
+- Sandbox environments for each language
+- Unit tests: `cargo test` (Rust), `npm test` (JS), `uv run pytest` (Python)
+- Integration tests with near-workspaces
+
+**Deployment:**
+```bash
+near deploy <account-id> <wasm-file>
+```
+
+**Language recommendations:**
+- **JavaScript/TypeScript**: Rapid prototyping, familiar syntax
+- **Rust**: Production apps, performance-critical code
+- **Python**: Data science, ML integration
+- **Go**: Systems programming, concurrency
+
+**Contract Standards:**
+- NEP-141: Fungible Tokens (FT)
+- NEP-171: Non-Fungible Tokens (NFT)
+- NEP-148: Fungible Token Metadata
+- NEP-177: NFT Metadata
+
+**Resources:**
+- Contract anatomy: /smart-contracts/anatomy
+- Best practices: /smart-contracts/security/welcome
+- Examples: https://github.com/near-examples
+
+---
+
+## Web3 Applications
+
+### Overview
+Web3 apps are frontend applications that interact with blockchain. NEAR's account model and wallet ecosystem make it easy to build user-friendly dApps.
+
+**Quick start:** /web3-apps/quickstart
+
+### Wallet Integration
+
+**Wallet Selector:**
+Modal that supports multiple NEAR wallets (MyNearWallet, Meteor, HERE Wallet, etc.)
+
+```javascript
+import { setupWalletSelector } from "@near-wallet-selector/core";
+
+const selector = await setupWalletSelector({
+  network: "testnet",
+  modules: [/* wallet modules */]
+});
+```
+
+**Ethereum Wallet Support:**
+NEAR supports MetaMask and other EVM wallets through Chain Signatures.
+
+**Resources:**
+- Wallet integration: /web3-apps/integrate-wallets
+- Ethereum wallets: /web3-apps/tutorials/web-login/ethereum-wallets
+
+### Key Features
+
+**Account Abstraction:**
+- Human-readable accounts (`alice.near` vs `0x123...abc`)
+- Function-call access keys (limited permissions for wallet-less UX)
+- Progressive gas fees
+
+**Frontend Libraries:**
+- `near-api-js`: JavaScript SDK
+- `@near-wallet-selector/core`: Wallet integration
+- `near-workspaces`: Testing framework
+
+---
+
+## Data Infrastructure
+
+### Overview
+NEAR offers three main solutions to access and monitor on-chain data: Data APIs, BigQuery Public Dataset, and NEAR Lake.
+
+**Resources:** /data-infrastructure/what-is
+
+### Data APIs
+Ready-to-use APIs for common queries:
+- User assets tracking
+- Transaction monitoring
+- On-chain event tracking
+
+**Best for:** Quick integration, standard queries
+**Setup:** Zero - just call API
+**Cost:** Free tier available
+
+### BigQuery Public Dataset
+Large dataset with on-chain data on Google Cloud Platform. Query near real-time blockchain data using SQL.
+
+**Best for:** Large-scale analytics, SQL-based insights
+**Setup:** Minimal - use Google Cloud
+**Cost:** ~$5/TB scanned (pay per query)
+
+**Use cases:**
+- Historic data analysis
+- Business intelligence
+- Research and insights
+
+### NEAR Lake
+Solution that watches NEAR network and stores all events. Build custom self-hosted indexers.
+
+**Best for:** Custom indexing, real-time streaming
+**Setup:** Self-host infrastructure
+**Languages:** Rust, JavaScript, Python, Go
+
+**Framework:** NEAR Lake Framework streams blocks directly to your server
+
+**Use cases:**
+- Custom data transformations
+- Real-time features
+- Combining NEAR data with other sources
+
+### Comparison Table
+
+| Solution | Best For | Setup | Cost | Query Language |
+|----------|----------|-------|------|----------------|
+| Data APIs | Quick integration | Zero | Free tier | REST API |
+| BigQuery | Large analytics | Minimal | Pay per query | SQL |
+| NEAR Lake | Custom indexing | Self-host | Infrastructure costs | Code (Rust/JS/Python/Go) |
+
+---
+
+## Aurora (EVM Compatibility)
+
+### Overview
+Aurora is an Ethereum-compatible blockchain running on NEAR as a layer 2. Deploy Ethereum apps without rewriting code—just change the RPC endpoint.
+
+**Resources:** /aurora/what-is
+
+### Key Features
+- **Full EVM compatibility**: Solidity contracts work as-is
+- **NEAR performance**: High throughput, fast finality
+- **Fixed gas prices**: 0.07 GWei
+- **All Ethereum tools**: MetaMask, Hardhat, Foundry, Truffle, Remix
+- **Gasless transactions**: Protocol-level meta transactions
+
+### Development Paths
+1. **Build on Aurora mainnet**: Deploy Ethereum dapps with low fees
+2. **Deploy Virtual Chains**: Create custom blockchain with configurable gas, permissions, integrations
+
+### Rainbow Bridge
+Trustless, permissionless protocol for connecting blockchains:
+- Transfer assets between NEAR, Aurora, and Ethereum
+- Cryptographic proof-based (no trusted intermediaries)
+- Read state and schedule calls across chains
+- Anyone can deploy, use, or maintain bridges
+
+**Access:** https://rainbowbridge.app
+
+---
+
+## Protocol Fundamentals
+
+### Account Model
+NEAR uses human-readable account IDs:
+- Top-level accounts: `alice.near`
+- Subaccounts: `app.alice.near`
+- Implicit accounts: derived from public keys
+
+**Features:**
+- Accounts can store smart contracts
+- Hold tokens and assets
+- Have multiple access keys
+- Create and manage subaccounts
+
+**Resources:** /protocol/account-model
+
+### Access Keys
+Two types of access keys:
+
+1. **Full Access Keys**: Complete account control
+   - Deploy contracts
+   - Transfer tokens
+   - Add/delete keys
+   - Create subaccounts
+
+2. **Function Call Keys**: Limited permissions
+   - Call specific contract methods
+   - Spend limited gas
+   - No token transfers
+   - Enables wallet-less UX
+
+**Resources:** /protocol/access-keys
+
+### Transactions
+NEAR transactions bundle actions:
+- Transfer tokens
+- Call contract functions
+- Deploy contracts
+- Create accounts
+- Add/delete keys
+
+**Transaction lifecycle:**
+1. Create and sign transaction
+2. Submit to RPC node
+3. Validation and execution
+4. Receipt generation for cross-contract calls
+5. Finality (~2 seconds)
+
+**Resources:** /protocol/transactions
+
+### Gas and Storage
+**Gas:** Computational work measurement
+- Predictable costs
+- Prepaid at transaction time
+- Unused gas refunded
+
+**Storage:** Data stored on-chain
+- Pay per byte (100 KB ≈ 1 NEAR)
+- Storage staking model
+- Recoverable when data deleted
+
+---
+
+## Primitives
+
+### Fungible Tokens (FT)
+NEAR FT standard (NEP-141) for creating and managing tokens.
+
+**Core methods:**
+- `ft_transfer`: Transfer tokens
+- `ft_balance_of`: Check balance
+- `ft_total_supply`: Get total supply
+
+**Resources:**
+- FT standard: /primitives/ft
+- NEP-141 spec: https://nomicon.io/Standards/Tokens/FungibleToken/Core
+
+### Non-Fungible Tokens (NFT)
+NEAR NFT standard (NEP-171) for unique digital assets.
+
+**Core methods:**
+- `nft_transfer`: Transfer NFT
+- `nft_token`: Get token info
+- `nft_tokens_for_owner`: List owner's NFTs
+
+**Metadata:** NEP-177 for rich NFT metadata (name, description, media)
+
+**Resources:**
+- NFT standard: /primitives/nft
+- NFT examples: https://github.com/near-examples/nft-tutorial
+
+### DAOs
+Decentralized Autonomous Organizations on NEAR:
+- On-chain governance
+- Proposal and voting systems
+- Treasury management
+
+**Frameworks:**
+- Sputnik DAO
+- AstroDAO
+
+**Resources:** /primitives/dao
+
+---
+
+## Developer Tools
+
+### NEAR CLI
+Command-line interface for NEAR development:
+
+```bash
+# Account management
+near create-account <account-id>
+near keys <account-id>
+
+# Contract deployment
+near deploy <account-id> <wasm-file>
+
+# Contract interaction
+near call <contract-id> <method> '{"args": "values"}' --accountId <account-id>
+near view <contract-id> <method> '{"args": "values"}'
+
+# Token transfers
+near send <sender> <receiver> <amount>
+```
+
+**Resources:** /tools/cli
+
+### Testing Tools
+
+**NEAR Workspaces:**
+- Integration testing framework
+- Spin up local sandbox
+- Deploy and test contracts
+- Available in Rust and JavaScript
+
+**Sandbox Testing:**
+- Isolated test environments
+- Fast execution
+- Contract state management
+
+### IDEs and Extensions
+- **VS Code**: Syntax highlighting for NEAR SDKs
+- **Remix**: Ethereum IDE (for Aurora contracts)
+- **IntelliJ**: Rust plugin for contract development
+
+---
+
+## Key Differences from Other Blockchains
+
+### Account Model
+- **NEAR**: Human-readable (`alice.near`)
+- **Ethereum**: Hex addresses (`0x123...abc`)
+
+### Gas Fees
+- **NEAR**: Predictable, refunded if unused, function-call keys for gasless UX
+- **Ethereum**: Variable, auction-based
+
+### Scaling
+- **NEAR**: Sharded architecture (horizontal scaling)
+- **Ethereum**: Layer-2 rollups (vertical scaling)
+
+### Account Abstraction
+- **NEAR**: Built-in, native feature
+- **Ethereum**: Requires ERC-4337 or separate solutions
+
+### Cross-Chain
+- **NEAR**: Native Chain Signatures and Intents
+- **Other chains**: Rely on bridges and wrapped tokens
+
+---
+
+## Common Developer Questions
+
+### Getting Started
+
+**Q: How do I deploy a contract?**
+A: Use `near deploy <account-id> <wasm-file>` via NEAR CLI
+
+**Q: Which language should I use?**
+A: JavaScript/TypeScript for rapid prototyping, Rust for production, Python/Go for specific use cases
+
+**Q: How do I test contracts?**
+A: NEAR provides sandbox environments. Run `npm test` (JS), `cargo test` (Rust), or `uv run pytest` (Python)
+
+### Accounts and Keys
+
+**Q: What's a function-call access key?**
+A: Limited permission key that can only call specific contract methods. Enables wallet-less UX.
+
+**Q: Can I have multiple keys on one account?**
+A: Yes, NEAR accounts support multiple access keys with different permissions
+
+**Q: How do I recover a deleted account?**
+A: Accounts cannot be recovered once deleted. The name becomes available for re-registration.
+
+### Integration
+
+**Q: How do I integrate wallet login?**
+A: Use @near-wallet-selector/core package. Supports multiple wallets in a single modal.
+
+**Q: Can I connect Ethereum wallets?**
+A: Yes, NEAR supports MetaMask and other EVM wallets through Chain Signatures
+
+**Q: How do I query blockchain data?**
+A: Use Data APIs for quick queries, BigQuery for analytics, or NEAR Lake for custom indexing
+
+### Cross-Chain
+
+**Q: How do I interact with other blockchains?**
+A: Use Chain Signatures to control accounts on Bitcoin, Ethereum, etc. from NEAR
+
+**Q: What is an intent?**
+A: User expresses desired outcome (e.g., "swap Token A for B at best price"), solvers compete to execute
+
+**Q: How do meta transactions work?**
+A: User signs transaction, relayer submits and pays gas. User maintains security without needing tokens.
+
+---
+
+## Best Practices
+
+### Smart Contract Security
+- Validate all inputs
+- Use assert for invariants
+- Implement access control
+- Test thoroughly (unit + integration)
+- Audit production contracts
+- Follow panic best practices
+- Limit cross-contract call complexity
+
+**Resources:** /smart-contracts/security/welcome
+
+### Frontend Development
+- Use Wallet Selector for multiple wallet support
+- Implement proper error handling
+- Cache contract data when appropriate
+- Show transaction status to users
+- Handle wallet disconnection gracefully
+
+### Performance Optimization
+- Minimize storage usage
+- Batch operations when possible
+- Use view functions for read-only operations
+- Optimize contract size (affects deployment cost)
+- Consider sharding for high throughput
+
+### Testing Strategy
+1. **Unit tests**: Test individual functions
+2. **Integration tests**: Test contract interactions
+3. **Sandbox tests**: Full environment simulation
+4. **Testnet deployment**: Real-world validation
+5. **Mainnet**: Production deployment
+
+---
+
+## Network Information
+
+### Networks
+
+**Mainnet:**
+- RPC: https://rpc.mainnet.near.org
+- Explorer: https://nearblocks.io
+- Archival RPC: https://archival-rpc.mainnet.near.org
+
+**Testnet:**
+- RPC: https://rpc.testnet.near.org
+- Explorer: https://testnet.nearblocks.io
+- Faucet: https://near-faucet.io
+
+### Performance Metrics
+- Transaction finality: ~2 seconds
+- Block time: ~1 second
+- Peak throughput: 13M+ transactions/day
+- Uptime: 5 years with zero downtime
+
+---
+
+## Community and Support
+
+### Official Channels
+- **Discord**: https://discord.gg/near
+- **Telegram**: https://t.me/NEARProtocol
+- **Twitter**: https://twitter.com/nearprotocol
+- **Forum**: https://gov.near.org
+- **GitHub**: https://github.com/near
+
+### Developer Resources
+- **DevHub**: https://dev.near.org
+- **Documentation**: https://docs.near.org
+- **Examples**: https://github.com/near-examples
+- **Tutorials**: https://docs.near.org/tutorials
+- **Office Hours**: Weekly developer calls
+
+### Ecosystem
+- **NEAR Week**: Weekly newsletter
+- **NEAR DevHub**: Developer programs and grants
+- **Hackathons**: Regular online and in-person events
+- **Grants**: Funding for ecosystem projects
+
+---
+
+## Glossary
+
+**Account**: Unique identifier on NEAR blockchain, can hold tokens and contracts
+
+**Access Key**: Cryptographic key pair that grants permissions on an account
+
+**Contract**: Smart contract program deployed to an account
+
+**Gas**: Computational work measurement and fee mechanism
+
+**Intent**: Desired outcome expressed by user, executed by solver network
+
+**MPC**: Multi-Party Computation for decentralized signing
+
+**Receipt**: Intermediate message in cross-contract call chain
+
+**Shard**: Partition of NEAR blockchain for horizontal scaling
+
+**Solver**: Entity that competes to fulfill user intents optimally
+
+**TEE**: Trusted Execution Environment for secure computation
+
+**View Function**: Read-only contract method (no state changes)
+
+**WASM**: WebAssembly, compilation target for NEAR contracts
+
+---
+
+## Last Updated
+January 2026
+
+This documentation is maintained by the NEAR DevHub team. For corrections or improvements, open an issue on GitHub.
+
+---
+
+For the most up-to-date information, always refer to the official documentation at https://docs.near.org

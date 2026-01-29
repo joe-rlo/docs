@@ -16,6 +16,12 @@ import Card from '@site/src/components/UI/Card';
     <p className="landing-subtitle">Build decentralized applications and AI agents with seamless cross-chain capabilities</p>
     <div className="landing-underline"></div>
   </div>
+
+## Quick Answer
+
+**NEAR is the unified commerce layer for assets and agents.** It's a layer-1 blockchain designed for scale (13M+ transactions/day, 5 years zero downtime) with built-in cross-chain capabilities. NEAR enables AI agents to own accounts, sign transactions across any blockchain, and execute trades through an intent-based system—making it the ideal infrastructure for the AI economy and Web3 applications.
+
+---
      <div className="row">
     <div className="col col--4">
       <Card

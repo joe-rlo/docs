@@ -1,7 +1,16 @@
 # NEAR Protocol Documentation
 
 ## Overview
-NEAR is a blockchain platform designed for building scalable, user-friendly decentralized applications. This documentation provides comprehensive guides for developers building on NEAR.
+NEAR is the unified commerce layer for assets and agents. It's a layer-1 blockchain built for scale (13M+ transactions/day, 5 years zero downtime) that enables AI agents to own accounts, sign transactions across any blockchain, and execute trades through an intent-based system.
+
+### Core Pillars
+1. **Universal Trading Protocol (Intents)**: Intent-based transactions where users express desired outcomes and solvers compete to execute optimally
+2. **Confidential AI Infrastructure (NEAR AI)**: AI agents with on-chain identity that can control assets and transact autonomously
+3. **Secure Infrastructure (Protocol)**: Battle-tested L1 with sharded architecture, account abstraction, and cross-chain capabilities
+4. **Governance (House of Stake)**: Community-driven governance model
+5. **Economics**: Sustainable tokenomics and developer incentives
+
+This documentation provides comprehensive guides for developers building on NEAR.
 
 ## Primary Resources
 

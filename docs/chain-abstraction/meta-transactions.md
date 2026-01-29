@@ -8,6 +8,12 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {CodeTabs, Language, Github} from "@site/src/components/UI/Codetabs"
 
+## Quick Answer
+
+**Meta transactions let users transact without paying gas fees while maintaining security.** A relayer is a web service with a funded NEAR account that receives signed transactions from users and submits them on-chain, covering the gas costs. Users sign their own transactions (maintaining security) but don't need NEAR tokens—the relayer pays gas on their behalf.
+
+---
+
 Relayers serve to delegate gas fees to a web service, allowing users to transact on NEAR without the need to acquire the token themselves while still retaining the security of signing their own transactions. This guide will lead you through the components necessary to construct a relayer capable of handling meta transactions.
 
 :::tip
@@ -304,3 +310,22 @@ This is a configuration for a relayer that covers BOTH gas AND storage fees for 
 This is a configuration for a relayer where an exchange running the relayer covers user withdraw fees when they are withdrawing stablecoins on NEAR (e.g., `USDT` or `USDC`)
 
 - [`exchange_withdraw.toml`](https://github.com/near/pagoda-relayer-rs/blob/main/examples/configs/exchange_withdraw.toml)
+
+---
+
+## Common Questions
+
+### What's the difference between meta transactions and regular transactions?
+**Meta transactions separate who signs from who pays.** In regular transactions, you must have NEAR tokens to pay gas fees. With meta transactions, you sign the transaction (proving it's you), but a relayer pays the gas. This enables gasless onboarding—users can interact with NEAR without owning NEAR tokens.
+
+### Is it secure if someone else submits my transactions?
+**Yes, because you still sign your own transactions.** The relayer can only submit transactions you've already signed—it can't change them or sign new ones on your behalf. You create a `SignedDelegateAction` that proves your approval, and the relayer just delivers it on-chain.
+
+### How do I prevent abuse of my relayer?
+**Use whitelisting, allowances, and OAuth tokens.** You can whitelist specific contracts, limit gas allowances per account, require OAuth for registration, or only relay for specific user accounts. The Rust relayer server supports all these filtering options to prevent spam and abuse.
+
+### What's the nonce collision problem with high-volume relayers?
+**Multiple simultaneous transactions from the same key can conflict.** Each access key has a nonce (transaction counter) that must increase sequentially. If you send many transactions at once, their nonces might collide, causing some to fail. The solution is to use multiple keys (up to 20) on your relayer account and rotate between them.
+
+### Can I charge users for relayer services?
+**Yes, you can require payment in fungible tokens.** One configuration option validates that users send FTs to a burn address equivalent to the gas costs. This lets you offer gasless transactions while still getting compensated, potentially in stablecoins instead of NEAR.
